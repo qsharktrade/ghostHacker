@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Q Shark Trade</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body { background: #10141f; color: #e9f5fd; font-family: 'Inter', Arial, sans-serif; margin: 0; min-height: 100vh;}
+    .orbitron { font-family: 'Orbitron', 'Inter', Arial, sans-serif; }
+    .centered { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 88vh;}
+    .hidden { display: none !important; }
+    .navbar { background: #151728; box-shadow: 0 0 20px #00ffe7a0; padding: 0 0.5rem; display: flex; align-items: center; justify-content: space-between; min-height: 62px;}
+    .navbar .logo { font-size: 1.5rem; font-weight: bold; letter-spacing: 2px; color: #00ffe7; text-shadow: 0 0 12px #00ffe7, 0 0 32px #00ffe7; font-family: 'Orbitron', Arial, sans-serif; margin-left: 1.2rem;}
+    .navbar .nav-links { display: flex; gap: 0.5rem;}
+    .navbar button { background: none; border: none; color: #e9f5fd; font-size: 1rem; font-family: inherit; margin: 0 0.4rem; padding: 0.5rem 1.1rem; border-radius: 2rem; cursor: pointer; outline: none; transition: all 0.15s;}
+    .navbar .nav-active, .navbar button:hover { background: #00ffe7; color: #10141f; box-shadow: 0 0 18px #00ffe7, 0 0 28px #00ffe7bb;}
+    .form-box { background: #16182a; border-radius: 18px; box-shadow: 0 0 32px #00ffe7cc, 0 0 40px #00ffe722; padding: 2rem 2.5rem 2rem 2.5rem; min-width: 330px; margin: 1.2rem 0;}
+    .form-box h2 { color: #00ffe7; font-family: 'Orbitron', Arial, sans-serif; text-align: center; margin-bottom: 1.2rem;}
+    .form-row { margin-bottom: 1.2rem; width: 100%; display: flex; flex-direction: column;}
+    .form-row label { font-size: 0.98rem; color: #b4caff; margin-bottom: 0.45rem; }
+    .input-glow { background: #191c32; border: 1.5px solid #00ffe7; border-radius: 7px; padding: 0.55rem 1rem; font-size: 1.09rem; color: #fff; outline: none; box-shadow: 0 0 8px #00ffe777; transition: 0.18s;}
+    .input-glow:focus { border-color: #39fcad; box-shadow: 0 0 12px #00ffe7cc, 0 0 28px #00ffe7;}
+    .form-box .form-btn, .btn { background: linear-gradient(90deg, #00ffe7 0%, #39fcad 100%); color: #10141f; font-weight: 700; border: none; border-radius: 6px; box-shadow: 0 0 16px #00ffe7; padding: 0.7rem 0; font-size: 1.12rem; letter-spacing: 0.7px; width: 100%; margin-top: 0.6rem; cursor: pointer; transition: background 0.18s, color 0.18s;}
+    .form-box .form-btn:hover, .btn:hover { background: #10141f; color: #00ffe7; border: 1 .balance-card { background: #191c32; border: 2.5px solid #00ffe7; border-radius: 15px; box-shadow: 0 0 20px #00ffe7, 0 0 60px #00ffe7a0; padding: 1.4rem 2.2rem; min-width: 220px; margin-bottom: 1.1rem;}
+    .balance-card h4 { font-family: 'Orbitron', Arial, sans-serif; color: #00ffe7; font-size: 1.13rem; margin-bottom: 0.4rem;}
+    .balance-card .amount { color: #fff; font-size: 2.1rem; font-family: 'Orbitron', Arial, sans-serif; margin-top: 0.1rem;}
+    .dashboard-actions { display: flex; gap: 1.5rem; margin-top: 1.2rem; flex-wrap: wrap;}
+    .dashboard-actions button { background: linear-gradient(90deg, #00ffe7 0%, #39fcad 100%); color: #10141f; font-weight: 700; border: none; border-radius: 6px; box-shadow: 0 0 16px #00ffe7; padding: 0.9rem 2: 0.7px; cursor: pointer; transition: background 0.18s, color 0.18s;}
+    .dashboard-actions button:hover { background: #10141f; color: #00ffe7; border: 1.5px solid #00ffe7;}
+    .payment-info {margin-top:1.2rem; font-size:1.05rem;}
+    .trade-balances-top {
+      width: 100%; max-width: 690px; display: flex; justify-content: space-between; align-items: center; margin: 0 auto 0.8rem auto; gap: 1rem; padding: 0.8rem 2rem;
+      background: #16182a; border-radius: 12px; border: 2px solid #00ffe7; box-shadow: 0 0 16px #00ffe744;
+      font-family: 'Orbitron', Arial, sans-serif; font-size: 1.2rem;
+    }
+    .trade-balances-top span { font-family: 'Orbitron', Arial, sans-serif; }
+   0 32px #00ffe7cc, 0 0 40px #00ffe7a2; padding: 1.3rem 1.8rem 1.6rem 1.8rem; margin: 2.2rem 0 2.1rem 0; width: 97vw; max-width: 690px;}
+    #cortex-chart { display: block; width: 100%; max-width: 630px; background: #10141f; border-radius: 10px; margin: 0 auto; border: 2px solid #00ffe7;}
+    .trade-controls { display: flex; gap: 1.1rem; justify-content: center; margin-top: 0.8rem; flex-wrap: wrap;}
+    .trade-controls input, .trade-controls select { background: #191c32; border: 1.5px solid #00ffe7; border-radius: 7px; padding: 0.47rem 1.1rem; font-size: 1.05rem; color: #fff; outline: none; min-width: 90px; box-shadow: 0 0 8px #00ffe777; transition: 0.18s;}
+    .trade-controls input:focus, .trade-controls select:focus { border-color: #39fcad; box-shadow: 0 0 12px #00ffe7cc, 0 0 28px #00ffe7;}
+    .up-btn, .down-btn { font-weight: 700; border: none; border-radius: 6px; padding: 0.7rem 2.1rem; font-size: 1.08rem; cursor: pointer; margin: 0 7px; box-shadow: 0 0 18px #00ffe7cc; transition: 0.18s;}
+    .up-btn { background: linear-gradient(90 { background: #10141f; color: #00ffe7; border: 1.5px solid #00ffe7;}
+    .down-btn { background: linear-gradient(90deg, #ff0055 0%, #fc39ad 100%); color: #fff;}
+    .down-btn:hover { background: #10141f; color: #ff0055; border: 1.5px solid #ff0055;}
+    .switch { display: block; text-align: center; margin-top: 1.2rem; color: #b4caff; cursor:pointer;}
+    .msg { text-align: center; margin-bottom: 1rem; color: #ff0055;}
+    .success { color: #00ffe7;}
+    @media (max-width: 700px) {
+      .form-box, .bg-card, .chart-container, .trade-balances-top, .box { min-width: 95vw; padding: 1.1rem 0.7rem; font-size: 1rem;}
+      .dashboard-cards { flex-direction: column; align-items: center; gap: 1.2rem; }
+      .balance-card { min-width: 80vw; }
+      .trade-controls { flex-direction: column; gap: 0.6rem; align-items: center; }
+      .box { min-width: 97vw; padding: 1.1rem 0.5rem; }
+    }
+    .fade-in { animation: fadeIn 0.8s;}
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(18px);} to { opacity: 1; transform: translateY(0);}}
+  </style>
+</head>
+<body>
+  <nav id="navbar" class="navbar"></nav>
+  <main id="auth-section" class="centered"></main>
+  <main id="dashboard-section" class="centered hidden"></main>
+  <main id="deposit-section" class="centered hidden"></main>
+  <main id="withdraw-section" class="centered hidden"></main>
+  <main id="trade-section" class="centered hidden"></main>
+  <main id="profile-section" class="centered hidden"></main>
+  <script>
+    // == Payment Numbers ==
+    const PAYMENT_NUMBERS = {
+      bkash:  "01842487399",
+      nagad:  "01842487399",
+      rocket: "019800304675",
+      upay:   "01980030467"
+    };
+    const CURRENCIES = ["BTC/USD", "USD/BDT", "USD/SAR", "USD/EUR"];
+    const DURATIONS = [
+      {label: "5 sec", value: 5},
+      {label: "15 sec", value: 15},
+      {label: "30 sec", value: 30},
+      {label: "1 min", value: 60},
+      {label: "3 min", value: 180},
+      {label: "5 min", value: 300}
+    ];
+    let state = {
+      user: null,
+      balances: { real: 0, demo: 10000 },
+      mode: 'real',
+      asset: CURRENCIES[0]
+    };
+    function $(id) { return document.getElementById(id); }
+    function saveData() {
+      localStorage.setItem('qst_user', JSON.stringify(state.user));
+      localStorage.setItem('qst_balances', JSON.stringify(state.balances));
+    }
+    function loadData() {
+      let u = localStorage.getItem('qst_user');
+      let b = localStorage.getItem('qst_balances');
+      if (u) state.user = JSON.parse(u);
+      if (b) state.balances = JSON.parse(b);
+    }
+    function showSection(id) {
+      ["auth-section","dashboard-section","deposit-section","withdraw-section","trade-section","profile-section"]
+        .forEach(sec => $(sec).classList.add('hidden'));
+      $(id).classList.remove('hidden');
+    }
+    function showMessage(msg, color="#00ffe7", delay=2200) {
+      let d = document.createElement("div");
+      d.className = "fade-in";
+      d.style.position = "fixed";
+      d.style.top = "24px";
+      d.style.left = "50%";
+      d.style.transform = "translateX(-50%)";
+      d.style.background = "#181b2a";
+      d.style.color = color;
+      d.style.boxShadow = "0 0 24px " + color + ", 0 0 64px #00ffe777";
+      d.style.padding = "1rem 2.5rem";
+      d.style.borderRadius = "2rem";
+      d.style.fontSize = "1.14rem";
+      d.style.zIndex = 99;
+      d.innerText = msg;
+      document.body.appendChild(d);
+      setTimeout(()=>{ d.remove(); }, delay);
+    }
+    function renderNav(active) {
+      let html = `<span class="logo orbitron">Q Shark Trade</span><div class="nav-links">`;
+      if (state.user) {
+        html += `<button ${active==='dashboard'?'class="nav-active"':''} onclick="goTo('dashboard')">Dashboard</button>
+        <button ${active==='deposit'?'class="nav-active"':''} onclick="goTo('deposit')">Deposit</button>
+        <button ${active==='withdraw'?'class="nav-active"':''} onclick="goTo('withdraw')">Withdraw</button>
+        <button ${active==='trade'?'class="nav-active"':''} onclick="goTo('trade')">Trade</button>
+        <button ${active==='profile'?'class="nav-active"':''} onclick="goTo('profile')">Profile</button>
+        <button onclick="logout()">Logout</button>`;
+      }
+      html += `</div>`;
+      $("navbar").innerHTML = html;
+    }
+    window.goTo = function(p) {
+      renderNav(p);
+      if (p === 'dashboard') renderDashboard();
+      if (p === 'deposit') renderDeposit();
+      if (p === 'withdraw') renderWithdraw();
+      if (p === 'trade') renderTrade();
+      if (p === 'profile') renderProfile();
+    };
+
+    // LOGIN/REGISTER PAGE
+    function renderAuth() {
+      renderNav();
+      showSection('auth-section');
+      $("auth-section").innerHTML = `
+      <div class="box" id="authbox"></div>
+      `;
+      let box = $("authbox");
+      function showForm(mode) {
+        let html = `<h2>${mode === 'login' ? 'Login' : 'Register'} to Q Shark Trade</h2>
+        <form id="form">
+          <label>Email</label>
+          <input class="input-glow" type="email" id="email" required placeholder="example@gmail.com">
+          <label>Password</label>
+          <input class="input-glow" type="password" id="pass" required placeholder="Password">
+          ${mode === 'register' ? `
+            <label>Confirm Password</label>
+            <input class="input-glow" type="password" id="conf" required placeholder="Confirm Password">
+          ` : ``}
+          <button class="btn" type="submit">${mode === 'login' ? 'Login' : 'Register'}</button>
+        </form>
+        <span class="switch" onclick="showForm('${mode === 'login' ? 'register' : 'login'}')">
+          ${mode === 'login' ? "Don't have an account? Register" : "Already have an account? Login"}
+        </span>
+        <div class="msg" id="msg"></div>
+        `;
+        box.innerHTML = html;
+        document.getElementById('form').onsubmit = function(e) {
+          e.preventDefault();
+          let email = document.getElementById('email').value.trim().toLowerCase();
+          let pass = document.getElementById('pass').value;
+          let users = JSON.parse(localStorage.getItem('qst_users')||'{}');
+          let msg = document.getElementById('msg');
+          if(mode==='login') {
+            if(!users[email]) return msg.textContent = "No such user. Please register.";
+            if(users[email] !== pass) return msg.textContent = "Incorrect password.";
+            state.user = { name: email.split('@')[0], email: email, pass: pass };
+            let b = JSON.parse(localStorage.getItem('qst_balances_'+email) || '{"real":0,"demo":10000}');
+            state.balances = b;
+            saveData();
+            renderDashboard();
+            showMessage("Welcome to Q Shark Trade!", "#00ffe7");
+          } else {
+            let conf = document.getElementById('conf').value;
+            if(users[email]) return msg.textContent = "User already exists. Please login.";
+            if(pass.length < 4) return msg.textContent = "Password must be at least 4 chars.";
+            if(pass !== conf) return msg.textContent = "Passwords do not match.";
+            users[email] = pass;
+            localStorage.setItem('qst_users', JSON.stringify(users));
+            msg.innerHTML = `<span class="success">Registration successful! Please login.</span>`;
+          }
+        }
+      }
+      window.showForm = showForm;
+      showForm('login');
+    }
+    function renderDashboard() {
+      showSection('dashboard-section');
+      renderNav('dashboard');
+      $("dashboard-section").innerHTML = `<h2 class="orbitron" style="color:#00ffe7;font-size:2.1rem;letter-spacing:2px;margin-bottom:1.3rem;">Welcome, ${state.user.name}</h2>
+        <div class="dashboard-cards">
+          <div class="balance-card">
+            <h4>Real Balance</h4>
+            <div class="amount" id="real-balance">${state.balances.real.toLocaleString()} ৳</div>
+          </div>
+          <div class="balance-card">
+            <h4>Demo Balance</h4>
+            <div class="amount" id="demo-balance">${state.balances.demo.toLocaleString()} ৳</div>
+          </div>
+        </div>
+        <div class="payment-info">
+          <span style="color:#00ffe7;"><b>Deposit to:</b></span><br>
+          <b>Bkash:</b> <span>${PAYMENT_NUMBERS.bkash}</span><br>
+          <b>Nagad:</b> <span>${PAYMENT_NUMBERS.nagad}</span><br>
+          <b>Rocket:</b> <span>${PAYMENT_NUMBERS.rocket}</span><br>
+          <b>Upay:</b> <span>${PAYMENT_NUMBERS.upay}</span>
+        </div>
+        <div class="dashboard-actions">
+          <button onclick="goTo('deposit')">Deposit</button>
+          <button onclick="goTo('withdraw')">Withdraw</button>
+          <button onclick="goTo('trade')">Trade Now</button>
+        </div>`;
+    }
+    function renderDeposit() {
+      showSection('deposit-section');
+      renderNav('deposit');
+      $("deposit-section").innerHTML = `<div class="form-box" style="max-width:370px;">
+        <h2 class="orbitron">Deposit (Instant)</h2>
+        <div style="font-size:1.02rem;margin-bottom:1rem;">
+          Send money to:<br>
+          <b>Bkash:</b> <span style="color:#00ffe7;">${PAYMENT_NUMBERS.bkash}</span><br>
+          <b>Nagad:</b> <span style="color:#00ffe7;">${PAYMENT_NUMBERS.nagad}</span><br>
+          <b>Rocket:</b> <span style="color:#00ffe7;">${PAYMENT_NUMBERS.rocket}</span><br>
+          <b>Upay:</b> <span style="color:#00ffe7;">${PAYMENT_NUMBERS.upay}</span>
+        </div>
+        <form id="depositForm">
+          <div class="form-row"><label>Amount (৳)</label>
+            <input required id="deposit-amount" class="input-glow" type="number" min="1" placeholder="Enter amount"></div>
+          <div class="form-row"><label>Last 4 digits of payment number</label>
+            <input required id="deposit-last4" class="input-glow" maxlength="4" pattern="\\d{4}" placeholder="e.g. 1234"></div>
+          <button type="submit" class="form-btn">Deposit Now</button>
+        </form>
+        <div id="deposit-msg" style="margin-top:1.1rem;"></div>
+      </div>`;
+      $("depositForm").onsubmit = function(e) {
+        e.preventDefault();
+        let amt = Number($("deposit-amount").value);
+        let last4 = $("deposit-last4").value.trim();
+        if (!amt || !/^\d{4}$/.test(last4)) return;
+        state.balances.real += amt;
+        saveData();
+        localStorage.setItem('qst_balances_'+state.user.email, JSON.stringify(state.balances));
+        $("depositForm").reset();
+        $("deposit-msg").innerHTML = `<span class="neon">Deposit successful! ৳${amt} added to your balance.</span>`;
+        document.getElementById("real-balance") && (document.getElementById("real-balance").innerText = state.balances.real.toLocaleString() + " ৳");
+        showMessage("Deposit successful!", "#00ffe7");
+      };
+    }
+    function renderWithdraw() {
+      showSection('withdraw-section');
+      renderNav('withdraw');
+      $("withdraw-section").innerHTML = `<div class="form-box" style="max-width:370px;">
+        <h2 class="orbitron" style="color:#ff0055;">Withdraw</h2>
+        <form id="withdrawForm">
+          <div class="form-row"><label>Amount (৳)</label>
+            <input required id="withdraw-amount" class="input-glow" type="number" min="1" max="${state.balances.real}" placeholder="Enter amount"></div>
+          <div class="form-row"><label>Withdraw to Number</label>
+            <input required id="withdraw-number" class="input-glow" maxlength="14" placeholder="bKash/Nagad/Rocket/Upay"></div>
+          <button type="submit" class="form-btn" style="background:linear-gradient(90deg,#ff0055 0%,#fc39ad 100%);color:#fff;">Submit Withdraw Request</button>
+        </form>
+        <div id="withdraw-msg" style="margin-top:1.1rem;"></div>
+      </div>`;
+      $("withdrawForm").onsubmit = function(e) {
+        e.preventDefault();
+        let amt = Number($("withdraw-amount").value);
+        let num = $("withdraw-number").value.trim();
+        if (!amt || !num || amt > state.balances.real) return;
+        state.balances.real -= amt;
+        saveData();
+        localStorage.setItem('qst_balances_'+state.user.email, JSON.stringify(state.balances));
+        $("withdrawForm").reset();
+        $("withdraw-msg").innerHTML = `<span class="neon" style="color:#ff0055;">Withdraw request submitted</span>`;
+        showMessage("Withdraw request submitted!", "#ff0055");
+        renderDashboard();
+      };
+    }
+    function renderProfile() {
+      showSection('profile-section');
+      renderNav('profile');
+      $("profile-section").innerHTML = `<div class="form-box" style="max-width:370px;">
+        <h2 class="orbitron">Profile</h2>
+        <div style="margin-bottom:1.2rem;">
+          <b>Name:</b> ${state.user.name}<br>
+          <b>Email:</b> ${state.user.email}<br>
+        </div>
+        <button onclick="logout()" class="form-btn" style="background:#ff0055;color:#fff;">Logout</button>
+      </div>`;
+    }
+    function renderTrade() {
+      showSection('trade-section');
+      renderNav('trade');
+      $("trade-section").innerHTML = `
+        <div class="trade-balances-top">
+          <span style="color:#00ffe7;">Real: <b id="real-balance-trade">${state.balances.real}</b> ৳</span>
+          <span style="color:#b4caff;">Demo: <b id="demo-balance-trade">${state.balances.demo}</b> ৳</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="cortex-chart" width="630" height="320"></canvas>
+        </div>
+        <div class="trade-controls">
+          <select id="asset-select">${CURRENCIES.map(a=>`<option${a===state.asset?' selected':''}>${a}</option>`).join('')}</select>
+          <select id="trade-mode"><option value="real">Real</option><option value="demo">Demo</option></select>
+          <input id="trade-amount" type="number" min="1" value="100" style="max-width:120px;" placeholder="Trade Amount">
+          <select id="trade-duration">${DURATIONS.map(d=>`<option value="${d.value}">${d.label}</option>`).join('')}</select>
+          <button class="up-btn" id="trade-up">UP</button>
+          <button class="down-btn" id="trade-down">DOWN</button>
+        </div>
+        <div style="margin-top:1.2rem;">
+          <span id="trade-status" style="font-size:1.2rem;"></span>
+        </div>
+      `;
+      $("asset-select").onchange = (e) => { state.asset = e.target.value; };
+      $("trade-mode").onchange = (e) => { state.mode = e.target.value; };
+      $("trade-up").onclick = ()=>startTrade('up');
+      $("trade-down").onclick = ()=>startTrade('down');
+      cortexChartInit();
+      function updateTradeBalances() {
+        $("real-balance-trade").innerText = state.balances.real;
+        $("demo-balance-trade").innerText = state.balances.demo;
+      }
+      window.updateTradeBalances = updateTradeBalances;
+    }
+    let candleData = [];
+    function cortexChartInit() {
+      let canvas = $("cortex-chart");
+      let ctx = canv
