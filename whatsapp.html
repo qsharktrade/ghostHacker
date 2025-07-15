@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -7,75 +8,103 @@
     body {
       background-color: black;
       color: #00ff00;
-      font-family: monospace;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
+      font-family: 'Courier New', Courier, monospace;
+      text-align: center;
+      padding: 50px;
     }
 
     input, button {
-      padding: 10px;
+      padding: 10px 20px;
       margin: 10px;
-      font-size: 1rem;
       border: 2px solid #00ff00;
-      background: black;
+      background-color: black;
       color: #00ff00;
+      font-size: 16px;
     }
 
-    #animation {
+    #animation-box {
       white-space: pre-wrap;
-      margin-top: 20px;
+      margin-top: 30px;
+      font-size: 16px;
       display: none;
-      font-size: 1.1rem;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #111;
+      padding: 20px;
+      border: 1px solid #00ff00;
     }
 
     #accessBtn {
       display: none;
-      margin-top: 20px;
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #00ff00;
+      color: black;
+      border: none;
+      cursor: pointer;
+    }
+
+    #accessBtn:hover {
+      box-shadow: 0 0 10px #00ff00;
     }
   </style>
 </head>
 <body>
 
-  <h1>হোয়াটসঅ্যাপ হ্যাক</h1>
-  <input type="text" id="phoneInput" placeholder="হোয়াটসঅ্যাপ নাম্বার লিখুন">
-  <button onclick="startHack()">হ্যাক</button>
+  <h1>📱 হোয়াটসঅ্যাপ হ্যাক</h1>
 
-  <div id="animation"></div>
-  <button id="accessBtn">📱 এক্সেস হোয়াটসঅ্যাপ একাউন্ট</button>
+  <input type="text" id="phoneInput" placeholder="হোয়াটসঅ্যাপ নাম্বার দিন">
+  <br>
+  <button onclick="startHack()">হ্যাক শুরু করুন</button>
+
+  <div id="animation-box"></div>
+
+  <button id="accessBtn">Access WhatsApp Account</button>
 
   <script>
     function startHack() {
       const phone = document.getElementById('phoneInput').value.trim();
       if (!phone) {
-        alert("অনুগ্রহ করে একটি নাম্বার লিখুন!");
+        alert("দয়া করে একটি হোয়াটসঅ্যাপ নাম্বার লিখুন!");
         return;
       }
 
-      document.getElementById('animation').style.display = 'block';
-      document.getElementById('animation').innerText = ">> হ্যাকিং শুরু হচ্ছে...\n";
+      const animationBox = document.getElementById("animation-box");
+      const accessBtn = document.getElementById("accessBtn");
+      animationBox.innerText = "";
+      animationBox.style.display = "block";
+      accessBtn.style.display = "none";
 
-      let steps = [
-        "> Connecting to WhatsApp server...",
-        "> Injecting payload...",
-        "> Bypassing security...",
-        "> Extracting account data...",
-        "> Finalizing access link..."
+      const messages = [
+        "Connecting to WhatsApp servers...",
+        "Bypassing security layers...",
+        "Analyzing encrypted data...",
+        "Verifying number: " + phone + "...",
+        "Fetching account credentials...",
+        "Decrypting session tokens...",
+        "Preparing account access...",
+        "Almost done...",
+        "Finalizing hack..."
       ];
 
-      let delay = 0;
-      steps.forEach((step, i) => {
-        setTimeout(() => {
-          document.getElementById('animation').innerText += step + "\n";
-        }, i * 8000); // 8s per step
-      });
+      let index = 0;
 
+      const interval = setInterval(() => {
+        if (index < messages.length) {
+          animationBox.innerText += "> " + messages[index] + "\n";
+          index++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 5000); // Each message appears every 5 seconds
+
+      // Show access button after 40 seconds
       setTimeout(() => {
-        document.getElementById('accessBtn').style.display = 'inline-block';
-      }, 40000); // 40 seconds
+        accessBtn.style.display = "inline-block";
+      }, 40000);
     }
   </script>
 
