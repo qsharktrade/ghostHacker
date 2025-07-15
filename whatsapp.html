@@ -1,1 +1,83 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>হোয়াটসঅ্যাপ হ্যাক</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
 
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 1rem;
+      border: 2px solid #00ff00;
+      background: black;
+      color: #00ff00;
+    }
+
+    #animation {
+      white-space: pre-wrap;
+      margin-top: 20px;
+      display: none;
+      font-size: 1.1rem;
+    }
+
+    #accessBtn {
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>হোয়াটসঅ্যাপ হ্যাক</h1>
+  <input type="text" id="phoneInput" placeholder="হোয়াটসঅ্যাপ নাম্বার লিখুন">
+  <button onclick="startHack()">হ্যাক</button>
+
+  <div id="animation"></div>
+  <button id="accessBtn">📱 এক্সেস হোয়াটসঅ্যাপ একাউন্ট</button>
+
+  <script>
+    function startHack() {
+      const phone = document.getElementById('phoneInput').value.trim();
+      if (!phone) {
+        alert("অনুগ্রহ করে একটি নাম্বার লিখুন!");
+        return;
+      }
+
+      document.getElementById('animation').style.display = 'block';
+      document.getElementById('animation').innerText = ">> হ্যাকিং শুরু হচ্ছে...\n";
+
+      let steps = [
+        "> Connecting to WhatsApp server...",
+        "> Injecting payload...",
+        "> Bypassing security...",
+        "> Extracting account data...",
+        "> Finalizing access link..."
+      ];
+
+      let delay = 0;
+      steps.forEach((step, i) => {
+        setTimeout(() => {
+          document.getElementById('animation').innerText += step + "\n";
+        }, i * 8000); // 8s per step
+      });
+
+      setTimeout(() => {
+        document.getElementById('accessBtn').style.display = 'inline-block';
+      }, 40000); // 40 seconds
+    }
+  </script>
+
+</body>
+</html>
