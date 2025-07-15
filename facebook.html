@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>ফেসবুক হ্যাক</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      text-shadow: 0 0 10px #00ff00;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      background: #111;
+      color: #00ff00;
+      border: 1px solid #00ff00;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: transparent;
+      border: 2px solid #00ff00;
+      color: #00ff00;
+      padding: 10px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #00ff00;
+      color: black;
+    }
+    #animation {
+      margin-top: 30px;
+      display: none;
+      font-size: 14px;
+      text-align: left;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #000;
+      padding: 15px;
+      border: 1px solid #00ff00;
+      height: 300px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+    #access-btn {
+      display: none;
+      margin-top: 30px;
+      font-size: 20px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ফেসবুক হ্যাকিং পেজ</h1>
+
+  <input type="text" id="fbLink" placeholder="ফেসবুক প্রোফাইল লিংক দিন">
+  <br>
+  <button onclick="startHack()">Hack</button>
+
+  <div id="animation"></div>
+
+  <div id="access-btn" onclick="alert('Success')">
+    ▶ Access Facebook Account
+  </div>
+
+  <script>
+    const hackerLines = [
+      "[+] Initializing hack protocol...",
+      "[*] Connecting to Facebook.com...",
+      "[+] SSL handshake complete.",
+      "[*] Bypassing firewall...",
+      "[+] Extracting user node...",
+      "[+] Injecting bypass script...",
+      "[*] Decoding access token...",
+      "[+] Access granted...",
+      "[*] Fetching messages...",
+      "[+] Retrieving friends list...",
+      "[*] Scanning image database...",
+      "[+] Exploiting API endpoint...",
+      "[*] Collecting credentials...",
+      "[+] Dumping login cookies...",
+      "[*] Tracing IP address...",
+      "[+] Encrypting trace logs...",
+      "[*] Finalizing attack vector...",
+      "[+] Attack complete."
+    ];
+
+    function startHack() {
+      const fbLink = document.getElementById("fbLink").value.trim();
+      if (fbLink === "") {
+        alert("দয়া করে একটি Facebook লিংক দিন।");
+        return;
+      }
+
+      const anim = document.getElementById("animation");
+      anim.innerHTML = "";
+      anim.style.display = "block";
+      document.getElementById("access-btn").style.display = "none";
+
+      let i = 0;
+      const totalDuration = 40000; // 40 seconds
+      const intervalTime = totalDuration / 100; // break into 100 fake lines
+      const fakeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
+
+      const interval = setInterval(() => {
+        if (i < 100) {
+          let randomLine = "";
+          for (let j = 0; j < 60; j++) {
+            randomLine += fakeChars.charAt(Math.floor(Math.random() * fakeChars.length));
+          }
+          anim.innerHTML += randomLine + "\n";
+          anim.scrollTop = anim.scrollHeight;
+          i++;
+        } else {
+          clearInterval(interval);
+          // After animation, show result
+          hackerLines.forEach((line, idx) => {
+            setTimeout(() => {
+              anim.innerHTML += "\n" + line;
+              anim.scrollTop = anim.scrollHeight;
+              if (idx === hackerLines.length - 1) {
+                document.getElementById("access-btn").style.display = "block";
+              }
+            }, idx * 300);
+          });
+        }
+      }, intervalTime);
+    }
+  </script>
+
+</body>
+</html>
