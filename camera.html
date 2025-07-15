@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ক্যামেরা হ্যাক</title>
   <style>
     html, body {
@@ -19,40 +19,50 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100%;
-      text-align: center;
+      min-height: 100vh;
       padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
     }
 
     input, button {
-      padding: 10px 20px;
+      padding: 12px 20px;
       margin: 10px;
       border: 2px solid #00ff00;
       background-color: black;
       color: #00ff00;
       font-size: 16px;
+      width: 90%;
+      max-width: 400px;
+      box-sizing: border-box;
     }
 
     #animation-box {
       white-space: pre-wrap;
       margin-top: 30px;
-      font-size: 16px;
+      font-size: 14px;
       display: none;
       text-align: left;
-      width: 90%;
+      width: 100%;
       max-width: 800px;
-      height: 60vh;
+      height: 300px;
       overflow-y: auto;
       background-color: #111;
-      padding: 20px;
+      padding: 15px;
       border: 1px solid #00ff00;
+      box-sizing: border-box;
     }
 
     #accessBtn {
       display: none;
       margin-top: 30px;
       padding: 12px 24px;
-      font-size: 18px;
+      font-size: 16px;
       background-color: #00ff00;
       color: black;
       border: none;
@@ -61,6 +71,27 @@
 
     #accessBtn:hover {
       box-shadow: 0 0 10px #00ff00;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      input, button {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      #accessBtn {
+        font-size: 14px;
+        padding: 10px 20px;
+      }
+
+      #animation-box {
+        font-size: 13px;
+        height: 250px;
+      }
     }
   </style>
 </head>
@@ -75,7 +106,7 @@
 
     <div id="animation-box"></div>
 
-    <button id="accessBtn">Access Camera</button>
+    <button id="accessBtn">📹 Access Camera</button>
   </div>
 
   <script>
@@ -109,11 +140,12 @@
       const interval = setInterval(() => {
         if (index < messages.length) {
           animationBox.innerText += "> " + messages[index] + "\n";
+          animationBox.scrollTop = animationBox.scrollHeight;
           index++;
         } else {
           clearInterval(interval);
         }
-      }, 5000); // 8 x 5s = 40s
+      }, 5000); // total 40 seconds
 
       setTimeout(() => {
         accessBtn.style.display = "inline-block";
