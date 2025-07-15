@@ -1,70 +1,143 @@
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-color: black;
-    color: #00ff00;
-    font-family: 'Courier New', Courier, monospace;
-  }
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>মেসেঞ্জার হ্যাক</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: #00ff00;
+      font-family: 'Courier New', Courier, monospace;
+      height: 100%;
+    }
 
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    min-height: 100vh;
-    padding: 20px 10px;
-    box-sizing: border-box;
-  }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100%;
+      padding: 40px 20px;
+      box-sizing: border-box;
+    }
 
-  h1 {
-    font-size: 20px;
-    margin: 20px 0 10px;
-    text-align: center;
-  }
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 40px;
+      text-align: center;
+      text-shadow: 0 0 5px #00ff00;
+    }
 
-  input, button {
-    width: 100%;
-    max-width: 300px;
-    padding: 10px;
-    margin: 8px 0;
-    border: 2px solid #00ff00;
-    background-color: black;
-    color: #00ff00;
-    font-size: 15px;
-    box-sizing: border-box;
-  }
+    input, button {
+      width: 100%;
+      max-width: 350px;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+      background: black;
+      border: 2px solid #00ff00;
+      color: #00ff00;
+      text-align: center;
+    }
 
-  #animation-box {
-    display: none;
-    white-space: pre-wrap;
-    margin-top: 20px;
-    font-size: 14px;
-    text-align: left;
-    width: 100%;
-    max-width: 360px;
-    height: 300px;
-    overflow-y: auto;
-    background-color: #111;
-    padding: 15px;
-    border: 1px solid #00ff00;
-    box-sizing: border-box;
-  }
+    button:hover {
+      background-color: #00ff00;
+      color: black;
+      cursor: pointer;
+    }
 
-  #accessBtn {
-    display: none;
-    margin-top: 20px;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #00ff00;
-    color: black;
-    border: none;
-    cursor: pointer;
-    max-width: 200px;
-  }
+    #animation-box {
+      white-space: pre-wrap;
+      margin-top: 20px;
+      font-size: 14px;
+      display: none;
+      text-align: left;
+      width: 100%;
+      max-width: 350px;
+      height: 250px;
+      overflow-y: auto;
+      background-color: #111;
+      padding: 15px;
+      border: 1px solid #00ff00;
+      box-sizing: border-box;
+    }
 
-  #accessBtn:hover {
-    box-shadow: 0 0 10px #00ff00;
-  }
-</style>
+    #accessBtn {
+      display: none;
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #00ff00;
+      color: black;
+      border: none;
+      cursor: pointer;
+    }
+
+    #accessBtn:hover {
+      box-shadow: 0 0 10px #00ff00;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>মেসেঞ্জার হ্যাক</h1>
+
+    <input type="text" id="linkInput" placeholder="মেসেঞ্জার আইডি লিংক দিন">
+    <button onclick="startHack()">হ্যাক শুরু করুন</button>
+
+    <div id="animation-box"></div>
+
+    <button id="accessBtn">Access Messenger</button>
+  </div>
+
+  <script>
+    function startHack() {
+      const link = document.getElementById('linkInput').value.trim();
+      if (!link) {
+        alert("দয়া করে একটি আইডি লিংক লিখুন!");
+        return;
+      }
+
+      const animationBox = document.getElementById("animation-box");
+      const accessBtn = document.getElementById("accessBtn");
+      animationBox.innerText = "";
+      animationBox.style.display = "block";
+      accessBtn.style.display = "none";
+
+      const messages = [
+        "Connecting to Messenger server...",
+        "Validating Messenger ID link...",
+        "Injecting message interceptor...",
+        "Target profile: " + link,
+        "Analyzing conversation history...",
+        "Decrypting private messages...",
+        "Extracting attachments...",
+        "Bypassing two-factor authentication...",
+        "Finalizing access process..."
+      ];
+
+      let index = 0;
+
+      const interval = setInterval(() => {
+        if (index < messages.length) {
+          animationBox.innerText += "> " + messages[index] + "\n";
+          animationBox.scrollTop = animationBox.scrollHeight;
+          index++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 5000);
+
+      setTimeout(() => {
+        accessBtn.style.display = "inline-block";
+      }, 40000);
+    }
+  </script>
+
+</body>
+</html>
