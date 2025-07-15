@@ -18,7 +18,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100%;
+      min-height: 100vh;
       text-align: center;
       padding: 20px;
     }
@@ -30,6 +30,9 @@
       background-color: black;
       color: #00ff00;
       font-size: 16px;
+      width: 100%;
+      max-width: 400px;
+      box-sizing: border-box;
     }
 
     #animation-box {
@@ -38,13 +41,14 @@
       font-size: 16px;
       display: none;
       text-align: left;
-      width: 90%;
+      width: 100%;
       max-width: 800px;
       height: 60vh;
       overflow-y: auto;
       background-color: #111;
       padding: 20px;
       border: 1px solid #00ff00;
+      box-sizing: border-box;
     }
 
     #accessBtn {
@@ -56,10 +60,26 @@
       color: black;
       border: none;
       cursor: pointer;
+      width: 100%;
+      max-width: 400px;
     }
 
     #accessBtn:hover {
       box-shadow: 0 0 10px #00ff00;
+    }
+
+    /* মোবাইল ফ্রেন্ডলি স্টাইল */
+    @media (max-width: 600px) {
+      input, button, #accessBtn {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      #animation-box {
+        font-size: 14px;
+        padding: 10px;
+        height: 50vh;
+      }
     }
   </style>
 </head>
@@ -112,7 +132,7 @@
         } else {
           clearInterval(interval);
         }
-      }, 5000); // 8 x 5s = 40s
+      }, 5000);
 
       setTimeout(() => {
         accessBtn.style.display = "inline-block";
