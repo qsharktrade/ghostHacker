@@ -1,62 +1,88 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WiFi হ্যাক</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
       background-color: black;
       color: #00ff00;
       font-family: 'Courier New', Courier, monospace;
     }
 
     .container {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100%;
-      text-align: center;
       padding: 20px;
+      text-align: center;
     }
 
-    input, button {
-      padding: 10px 20px;
-      margin: 10px;
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      max-width: 400px;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
       border: 2px solid #00ff00;
       background-color: black;
       color: #00ff00;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 12px 24px;
+      margin: 10px 0;
       font-size: 16px;
+      border: 2px solid #00ff00;
+      background-color: black;
+      color: #00ff00;
+      cursor: pointer;
+      border-radius: 5px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    button:hover {
+      background-color: #00ff00;
+      color: black;
     }
 
     #animation-box {
       white-space: pre-wrap;
-      margin-top: 30px;
-      font-size: 16px;
+      margin-top: 20px;
+      font-size: 14px;
       display: none;
       text-align: left;
-      width: 90%;
-      max-width: 800px;
-      height: 60vh;
+      width: 100%;
+      max-width: 600px;
+      height: 50vh;
       overflow-y: auto;
       background-color: #111;
       padding: 20px;
       border: 1px solid #00ff00;
+      border-radius: 5px;
     }
 
     #accessBtn {
       display: none;
-      margin-top: 30px;
-      padding: 12px 24px;
-      font-size: 18px;
       background-color: #00ff00;
       color: black;
       border: none;
-      cursor: pointer;
     }
 
     #accessBtn:hover {
@@ -67,11 +93,11 @@
 <body>
 
   <div class="container">
-    <h1>📶 ওয়াইফাই হ্যাক</h1>
+    <h1>ওয়াইফাই হ্যাক</h1>
 
     <input type="text" id="locationInput" placeholder="জায়গার নাম দিন">
     <input type="text" id="wifiInput" placeholder="WiFi এর নাম দিন">
-    <br>
+
     <button onclick="startHack()">হ্যাক করুন</button>
 
     <div id="animation-box"></div>
