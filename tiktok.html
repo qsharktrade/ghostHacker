@@ -1,1 +1,125 @@
 
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>টিকটক হ্যাক</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: black;
+      color: #00ff00;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      text-align: center;
+      padding: 20px;
+    }
+
+    input, button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: 2px solid #00ff00;
+      background-color: black;
+      color: #00ff00;
+      font-size: 16px;
+    }
+
+    #animation-box {
+      white-space: pre-wrap;
+      margin-top: 30px;
+      font-size: 16px;
+      display: none;
+      text-align: left;
+      width: 90%;
+      max-width: 800px;
+      height: 60vh;
+      overflow-y: auto;
+      background-color: #111;
+      padding: 20px;
+      border: 1px solid #00ff00;
+    }
+
+    #accessBtn {
+      display: none;
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #00ff00;
+      color: black;
+      border: none;
+      cursor: pointer;
+    }
+
+    #accessBtn:hover {
+      box-shadow: 0 0 10px #00ff00;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🎵 টিকটক হ্যাক</h1>
+
+    <input type="text" id="inputField" placeholder="টিকটক লিংক দিন">
+    <br>
+    <button onclick="startHack()">হ্যাক শুরু করুন</button>
+
+    <div id="animation-box"></div>
+
+    <button id="accessBtn">Access TikTok Account</button>
+  </div>
+
+  <script>
+    function startHack() {
+      const userInput = document.getElementById('inputField').value.trim();
+      if (!userInput) {
+        alert("দয়া করে একটি টিকটক লিংক লিখুন!");
+        return;
+      }
+
+      const animationBox = document.getElementById("animation-box");
+      const accessBtn = document.getElementById("accessBtn");
+      animationBox.innerText = "";
+      animationBox.style.display = "block";
+      accessBtn.style.display = "none";
+
+      const messages = [
+        "Connecting to TikTok servers...",
+        "Analyzing video stream...",
+        "Injecting profile tracker...",
+        "Target: " + userInput,
+        "Bypassing privacy locks...",
+        "Retrieving media library...",
+        "Decrypting chat and feed...",
+        "Stabilizing data packets...",
+        "Finalizing TikTok access..."
+      ];
+
+      let index = 0;
+
+      const interval = setInterval(() => {
+        if (index < messages.length) {
+          animationBox.innerText += "> " + messages[index] + "\n";
+          index++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 5000); // 8 messages * 5s = 40s
+
+      setTimeout(() => {
+        accessBtn.style.display = "inline-block";
+      }, 40000);
+    }
+  </script>
+
+</body>
+</html>
