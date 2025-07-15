@@ -1,1 +1,110 @@
 
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Facebook রিপোর্ট</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+      border: 2px solid #00ff00;
+      background-color: black;
+      color: #00ff00;
+    }
+
+    #animation {
+      display: none;
+      white-space: pre-wrap;
+      border: 1px solid #00ff00;
+      padding: 20px;
+      width: 80%;
+      max-width: 700px;
+      height: 300px;
+      overflow-y: auto;
+      margin-top: 20px;
+    }
+
+    #accessBtn {
+      display: none;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #00ff00;
+      color: black;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+    }
+
+    #accessBtn:hover {
+      box-shadow: 0 0 10px #00ff00;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📄 Facebook রিপোর্ট</h1>
+
+  <input type="text" id="linkInput" placeholder="আইডির লিংক দিন">
+  <button onclick="startHack()">রিপোর্ট করুন</button>
+
+  <div id="animation"></div>
+  <button id="accessBtn">Access Facebook Report</button>
+
+  <script>
+    function startHack() {
+      const link = document.getElementById('linkInput').value.trim();
+      if (!link) {
+        alert("অনুগ্রহ করে একটি ফেসবুক আইডির লিংক দিন!");
+        return;
+      }
+
+      const animation = document.getElementById('animation');
+      const accessBtn = document.getElementById('accessBtn');
+      animation.innerText = "";
+      animation.style.display = "block";
+      accessBtn.style.display = "none";
+
+      const messages = [
+        "Connecting to Facebook server...",
+        "Scanning user profile...",
+        "Analyzing suspicious activity...",
+        "Target ID: " + link,
+        "Generating report log...",
+        "Flagging repeated violations...",
+        "Compiling abuse evidence...",
+        "Finalizing report submission...",
+        "Report successfully created!"
+      ];
+
+      let index = 0;
+      const interval = setInterval(() => {
+        if (index < messages.length) {
+          animation.innerText += "> " + messages[index] + "\n";
+          index++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 5000); // 8 × 5s = 40s
+
+      setTimeout(() => {
+        accessBtn.style.display = "inline-block";
+      }, 40000);
+    }
+  </script>
+
+</body>
+</html>
