@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>👻 Ghost Hacker</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', Courier, monospace;
+      background-color: black;
+      color: #00ff00;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 4rem;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+    }
+
+    #animation {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 0.15em solid green;
+      width: 0;
+      animation: typing 6s steps(30) forwards, blink 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      0% { width: 0; }
+      100% { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    #password-box {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: black;
+      border: 1px solid #00ff00;
+      color: #00ff00;
+      font-size: 1rem;
+    }
+
+    #error-message {
+      color: red;
+      margin-top: 10px;
+      display: none;
+    }
+
+    #access-button {
+      margin-top: 20px;
+      background-color: #00ff00;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+
+    #access-button:hover {
+      background-color: black;
+      color: #00ff00;
+      box-shadow: 0 0 10px #00ff00;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>👻 Ghost Hacker</h1>
+  <div id="animation"></div>
+  <input type="password" id="password-box" placeholder="Enter password..." oninput="checkPassword()">
+  <div id="error-message">⚠ Warning: Wrong password!</div>
+  <button id="access-button" onclick="accessApp()" disabled>Access</button>
+
+  <script>
+    let password = "3663363672370921028"; // Correct password
+    let typedText = "> Initializing system...\n> Verifying access point...\n> Awaiting password input...";
+    document.getElementById('animation').innerText = typedText;
+
+    function checkPassword() {
+      let inputPassword = document.getElementById('password-box').value;
+      let accessButton = document.getElementById('access-button');
+      if (inputPassword === password) {
+        document.getElementById('error-message').style.display = 'none';
+        accessButton.disabled = false; // Enable Access button after correct password
+      } else if (inputPassword.length > 0) {
+        document.getElementById('error-message').style.display = 'block';
+        accessButton.disabled = true;
+      } else {
+        document.getElementById('error-message').style.display = 'none';
+        accessButton.disabled = true;
+      }
+    }
+
+    function accessApp() {
+      // Redirect to the home page after clicking Access
+      window.location.href = "home.html";
+    }
+  </script>
+
+</body>
+</html>
