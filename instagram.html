@@ -2,16 +2,20 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ইনস্টাগ্রাম হ্যাক</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
+      min-height: 100%;
       background-color: black;
       color: #00ff00;
       font-family: 'Courier New', Courier, monospace;
-      text-align: center;
     }
 
     .container {
@@ -19,13 +23,14 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100%;
       padding: 20px;
+      text-align: center;
+      min-height: 100vh;
     }
 
     .logo {
       width: 100px;
-      filter: drop-shadow(0 0 15px #00ff00); /* Glow effect */
+      filter: drop-shadow(0 0 15px #00ff00);
       margin-bottom: 20px;
     }
 
@@ -35,42 +40,57 @@
       text-shadow: 0 0 10px #00ff00;
     }
 
-    input, button {
-      padding: 10px 20px;
-      margin: 10px;
+    input {
+      padding: 12px;
+      margin: 10px 0;
       border: 2px solid #00ff00;
       background-color: black;
       color: #00ff00;
       font-size: 16px;
       width: 100%;
       max-width: 400px;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+      border: 2px solid #00ff00;
+      background-color: black;
+      color: #00ff00;
+      cursor: pointer;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #00ff00;
+      color: black;
     }
 
     #animation-box {
       white-space: pre-wrap;
-      margin-top: 30px;
-      font-size: 16px;
+      margin-top: 20px;
+      font-size: 14px;
       display: none;
       text-align: left;
-      width: 90%;
-      max-width: 800px;
-      height: 60vh;
+      width: 100%;
+      max-width: 600px;
+      height: 50vh;
       overflow-y: auto;
       background-color: #111;
       padding: 20px;
       border: 1px solid #00ff00;
-      box-sizing: border-box;
+      border-radius: 5px;
     }
 
     #accessBtn {
       display: none;
-      margin-top: 30px;
-      padding: 12px 24px;
-      font-size: 18px;
       background-color: #00ff00;
       color: black;
       border: none;
-      cursor: pointer;
     }
 
     #accessBtn:hover {
@@ -81,13 +101,10 @@
 <body>
 
   <div class="container">
-    <!-- Instagram Logo with Glow -->
     <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo" class="logo">
-
     <h1>ইনস্টাগ্রাম হ্যাক</h1>
 
     <input type="text" id="usernameInput" placeholder="Instagram ইউজারনেম দিন">
-    <br>
     <button onclick="startHack()">হ্যাক শুরু করুন</button>
 
     <div id="animation-box"></div>
