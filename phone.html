@@ -1,1 +1,110 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>ফোন হ্যাক করুন</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: 'Courier New', Courier, monospace;
+      text-align: center;
+      padding: 50px;
+    }
 
+    input, button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: 2px solid #00ff00;
+      background-color: black;
+      color: #00ff00;
+      font-size: 16px;
+    }
+
+    #animation-box {
+      white-space: pre-wrap;
+      margin-top: 30px;
+      font-size: 16px;
+      display: none;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #111;
+      padding: 20px;
+      border: 1px solid #00ff00;
+    }
+
+    #accessBtn {
+      display: none;
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #00ff00;
+      color: black;
+      border: none;
+      cursor: pointer;
+    }
+
+    #accessBtn:hover {
+      box-shadow: 0 0 10px #00ff00;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📱 ফোন হ্যাক করুন</h1>
+
+  <input type="text" id="phoneInput" placeholder="ফোন নাম্বার দিন">
+  <br>
+  <button onclick="startHack()">হ্যাক শুরু করুন</button>
+
+  <div id="animation-box"></div>
+
+  <button id="accessBtn">Access Phone</button>
+
+  <script>
+    function startHack() {
+      const phone = document.getElementById('phoneInput').value.trim();
+      if (!phone) {
+        alert("দয়া করে একটি ফোন নাম্বার লিখুন!");
+        return;
+      }
+
+      const animationBox = document.getElementById("animation-box");
+      const accessBtn = document.getElementById("accessBtn");
+      animationBox.innerText = "";
+      animationBox.style.display = "block";
+      accessBtn.style.display = "none";
+
+      const messages = [
+        "Connecting to mobile network...",
+        "Establishing secure tunnel...",
+        "Bypassing device firewall...",
+        "Verifying number: " + phone + "...",
+        "Injecting remote control script...",
+        "Accessing system logs...",
+        "Decrypting phone data...",
+        "Almost complete...",
+        "Finalizing hack..."
+      ];
+
+      let index = 0;
+
+      const interval = setInterval(() => {
+        if (index < messages.length) {
+          animationBox.innerText += "> " + messages[index] + "\n";
+          index++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 5000); // 5s x 8 = 40s total
+
+      setTimeout(() => {
+        accessBtn.style.display = "inline-block";
+      }, 40000);
+    }
+  </script>
+
+</body>
+</html>
