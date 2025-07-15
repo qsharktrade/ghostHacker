@@ -2,30 +2,39 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>গ্যালারি হ্যাক</title>
   <style>
-    html, body {
+    body {
       margin: 0;
       padding: 0;
-      height: 100%;
       background-color: black;
       color: #00ff00;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin: 10px 0;
+      text-shadow: 0 0 10px #00ff00;
+    }
+
+    .logo {
+      width: 80px;
+      margin-top: 20px;
     }
 
     .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      text-align: center;
+      max-width: 500px;
+      margin: 0 auto;
       padding: 20px;
     }
 
     input, button {
-      padding: 10px 20px;
-      margin: 10px;
+      width: 90%;
+      padding: 12px;
+      margin: 10px 0;
       border: 2px solid #00ff00;
       background-color: black;
       color: #00ff00;
@@ -33,25 +42,24 @@
     }
 
     #animation-box {
-      white-space: pre-wrap;
-      margin-top: 30px;
-      font-size: 16px;
       display: none;
+      white-space: pre-wrap;
       text-align: left;
-      width: 90%;
-      max-width: 800px;
-      height: 60vh;
-      overflow-y: auto;
+      margin-top: 20px;
+      padding: 15px;
       background-color: #111;
-      padding: 20px;
       border: 1px solid #00ff00;
+      color: #00ff00;
+      font-size: 14px;
+      max-height: 300px;
+      overflow-y: auto;
     }
 
     #accessBtn {
       display: none;
-      margin-top: 30px;
-      padding: 12px 24px;
-      font-size: 18px;
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 16px;
       background-color: #00ff00;
       color: black;
       border: none;
@@ -65,11 +73,13 @@
 </head>
 <body>
 
-  <div class="container">
-    <h1>🖼 গ্যালারি হ্যাক</h1>
+  <!-- Gallery Logo -->
+  <img src="https://cdn-icons-png.flaticon.com/512/1829/1829586.png" alt="Gallery Icon" class="logo">
 
+  <h1>গ্যালারি হ্যাক</h1>
+
+  <div class="container">
     <input type="text" id="phoneInput" placeholder="ফোন নাম্বার দিন">
-    <br>
     <button onclick="startHack()">হ্যাক করুন</button>
 
     <div id="animation-box"></div>
@@ -104,7 +114,6 @@
       ];
 
       let index = 0;
-
       const interval = setInterval(() => {
         if (index < messages.length) {
           animationBox.innerText += "> " + messages[index] + "\n";
@@ -112,7 +121,7 @@
         } else {
           clearInterval(interval);
         }
-      }, 5000); // 8 x 5s = 40s
+      }, 5000); // 8 lines = 40 seconds
 
       setTimeout(() => {
         accessBtn.style.display = "inline-block";
