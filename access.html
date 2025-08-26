@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Ghost Hacker Premium</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background: #000;
+      color: #0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(0,0,0,0.85);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00ff00;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .typing-text {
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 200px;
+      white-space: pre-line;
+      overflow: hidden;
+      border-right: 2px solid #0f0;
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: #0f0; }
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 15px;
+      width: 80%;
+      text-align: center;
+      font-size: 16px;
+      background: rgba(0,255,0,0.05);
+      color: #0f0;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 25px;
+      background: linear-gradient(90deg, #0f0, #00ffcc);
+      border: 2px solid #0f0;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #000;
+      text-shadow: 0 0 5px #0f0;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #00ffcc, #0f0);
+      box-shadow: 0 0 15px #0f0;
+    }
+
+    .error {
+      margin-top: 10px;
+      color: red;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="typing" class="typing-text"></div>
+
+    <input type="password" id="accessCode" placeholder="Enter Access Code">
+    <br>
+    <button onclick="checkCode()">Annihilation</button>
+    <div class="error" id="errorMsg">❌ ভুল কোড দিয়েছেন!</div>
+  </div>
+
+  <script>
+    // Hacker style typing effect
+    const text = `🎉 Congratulations 🎉
+Ghost Hacker প্রিমিয়াম কাস্টমার আপনি।
+কিন্তু আপনার একাউন্টে এখনো এক্টিভ করা হয়নি। 
+আপনার ১০২০ টাকা পরিশোধ করে আপনার অ্যাকাউন্ট এক্টিভ করে নিন। 
+অফিসিয়াল ফেসবুক পেজ থেকে অথবা হোয়াটসঅ্যাপ নাম্বার:
++8801842487399
++8801980030467
+
+Access Code দিন অ্যাকাউন্ট এক্টিভ করার জন্য 👇`;
+
+    let index = 0;
+    function typeText() {
+      if(index < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeText, 50); // typing speed
+      }
+    }
+    typeText();
+
+    // Access code check
+    function checkCode() {
+      const code = document.getElementById("accessCode").value;
+      if (code === "25252525") {
+        window.location.href = "next.html";
+      } else {
+        document.getElementById("errorMsg").style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
